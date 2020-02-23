@@ -15,7 +15,7 @@ export default (req, store) => {
     <html>
       <head></head>
       <body>
-        <div id="root">${content} </div>
+        <div id="root">${content}</div>
         <script>
           window.INITIAL_STATE = ${serialize(store.getState())}
         </script>
