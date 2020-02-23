@@ -6,8 +6,16 @@ import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import serialize from 'serialize-javascript';
 export default (req, store) => {
+  const context = {
+    insertCss: (...styles) => {
+      const removeCss = styles.map(x => x._insertCss());
+      return () => {
+        removeCss.forEach(f => f());
+      };
+    }
+  }
   const content = renderToString(<Provider store={store}>
-    <StaticRouter context={{}} location={req.path}>
+    <StaticRouter context={{content}} location={req.path}>
       <div>{renderRoutes(Routes)}</div>
     </StaticRouter>
   </Provider>);
@@ -19,7 +27,7 @@ export default (req, store) => {
         <script>
           window.INITIAL_STATE = ${serialize(store.getState())}
         </script>
-        <script src="bundle.js"></script>
+        <script type="text/babel" src="bundle.js"></script>
       </body>
     </html>`
 }

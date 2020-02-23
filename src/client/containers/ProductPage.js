@@ -1,37 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchSingleProduct } from '../actions';
+import { fetchProductById } from '../actions/product';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ErrorBoundary from '../components/ErrorBoundaries';
 import { Link } from 'react-router-dom';
-class ProductPage extends Component {
-  componentDidMount() {
-    this.props.fetchSingleProduct();
-  }
-  render() {
-    let { currentProduct } = this.props;
-    return(
-      <div>
-        <Header/>
-        <div>
-          Here's a ProductPage:
-        </div>
-        <div>
-          {currentProduct.name}
-        </div>
-        <Footer/>
-      </div>
-    )
-  }
+function ProductPage(props) {
+  const [product, setProduct] = useState(props.product);
+  useEffect(() => {
+    props.fetchProductById()
+  },[])
+  console.log(product);
+  if(!product) return null;
+  return (
+    <div>
+    <Header/>
+    <div>
+      Here's a ProductPage:
+    </div>
+    <div>
+      <ErrorBoundary>
+        {product.productInfo.name}
+      </ErrorBoundary>
+    </div>
+    <Footer/>
+  </div>
+  )
 }
 function mapStateToProps(state) {
   console.log('getting data');
-  return { currentProduct: state.products.currentProduct }
+  return { product: state.product }
 }
 function loadData(store) {
-  return store.dispatch(fetchSingleProduct())
+  return store.dispatch(fetchProductById())
 }
 export default {
   loadData,
-  component: connect(mapStateToProps, {fetchSingleProduct})(ProductPage)
+  component: connect(mapStateToProps, {fetchProductById})(ProductPage)
 }

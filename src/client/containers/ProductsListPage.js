@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchAllProducts } from '../actions';
+import { fetchAllProducts } from '../actions/products';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
@@ -20,6 +20,7 @@ class ProductsList extends Component {
     this.props.fetchAllProducts();
   }
   render() {
+    console.log(this.props.products);
     return(
       <div>
         <Header/>
@@ -35,7 +36,7 @@ class ProductsList extends Component {
   }
 }
 function mapStateToProps(state) {
-  return { products: state.products }
+  return { products: state.products.data }
 }
 function loadData(store) {
   return store.dispatch(fetchAllProducts())

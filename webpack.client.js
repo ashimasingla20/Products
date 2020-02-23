@@ -2,7 +2,6 @@ const path = require('path');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.js');
 require("babel-polyfill");
-
 const config = {
   // Tell webpack the root file of our
   // server application
