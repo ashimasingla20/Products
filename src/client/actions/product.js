@@ -6,7 +6,6 @@ export const fetchProductById = () => async(dispatch, id) => {
   dispatch({type: FETCH_PRODUCT_BY_ID_REQUEST})
   try {
     const res = await axios.get(`https://node-sample-api.herokuapp.com/api/products/1`)
-    console.log(res.data);
     dispatch({
       type: FETCH_PRODUCT_BY_ID_SUCCESS,
       payload: res.data

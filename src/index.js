@@ -3,6 +3,8 @@ import renderer from './helpers/renderer';
 import creatingStore from './helpers/createStore';
 import { matchRoutes } from 'react-router-config';
 import Routes from './client/Routes';
+import './client/App.scss'
+//const path = require('path');
 const app = express();
 app.use(express.static('public'));
 app.get('*', (req, res) => {

@@ -9,6 +9,7 @@ import reducers from './reducers';
 import logger from 'redux-logger';
 import { renderRoutes } from 'react-router-config';
 import './App.scss'
+import './App.css'
 const store = createStore(reducers, window.INITIAL_STATE, applyMiddleware(thunk, logger));
 ReactDOM.hydrate(
   <Provider store={store}>

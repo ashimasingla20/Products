@@ -1,6 +1,11 @@
 const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require("clean-webpack-plugin")
 module.exports = {
   // Tell webpack to run babel on every file it runs through
+  mode: 'development',
+  plugins: [ new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin()],
   module: {
     rules: [
       {
@@ -19,7 +24,10 @@ module.exports = {
         test: /\.css$/,
         use: [
           'isomorphic-style-loader',
-          require.resolve('style-loader'),
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          // require.resolve('style-loader'),
           {
             loader: require.resolve('css-loader'),
             options: {
@@ -51,7 +59,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: [
-            require.resolve('style-loader'),
+            {
+              loader: MiniCssExtractPlugin.loader,
+            },
+            //require.resolve('style-loader'),
             require.resolve('css-loader'),
             require.resolve('sass-loader')
         ]

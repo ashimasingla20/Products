@@ -2,6 +2,9 @@
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
+/******/ 	// object to store loaded and loading wasm modules
+/******/ 	var installedWasmModules = {};
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -44,6 +47,11 @@
 /******/ 		}
 /******/ 	};
 /******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -59,848 +67,337 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// object with all compiled WebAssembly.Modules
+/******/ 	__webpack_require__.w = {};
+/******/
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ "./src/client/App.scss":
+/*!*****************************!*\
+  !*** ./src/client/App.scss ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack:///./src/client/App.scss?");
+
+/***/ }),
+
+/***/ "./src/client/Routes.js":
+/*!******************************!*\
+  !*** ./src/client/Routes.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _ProductsListPage = __webpack_require__(/*! ./containers/ProductsListPage */ \"./src/client/containers/ProductsListPage.js\");\n\nvar _ProductsListPage2 = _interopRequireDefault(_ProductsListPage);\n\nvar _ProductPage = __webpack_require__(/*! ./containers/ProductPage */ \"./src/client/containers/ProductPage.js\");\n\nvar _ProductPage2 = _interopRequireDefault(_ProductPage);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar routesArr = [_extends({}, _ProductsListPage2.default, {\n  path: '/products'\n}), _extends({}, _ProductPage2.default, {\n  path: '/pdp/:id'\n})];\nexports.default = routesArr;\n\n//# sourceURL=webpack:///./src/client/Routes.js?");
+
+/***/ }),
+
+/***/ "./src/client/actions/constants.js":
+/*!*****************************************!*\
+  !*** ./src/client/actions/constants.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar FETCH_PRODUCTS_REQUEST = exports.FETCH_PRODUCTS_REQUEST = 'FETCH_PRODUCTS_REQUEST';\nvar FETCH_PRODUCTS_SUCCESS = exports.FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';\nvar FETCH_PRODUCTS_FAILURE = exports.FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE';\nvar RESET_PRODUCTS = exports.RESET_PRODUCTS = 'RESET_PRODUCT';\n\nvar FETCH_PRODUCT_BY_ID_REQUEST = exports.FETCH_PRODUCT_BY_ID_REQUEST = 'FETCH_PRODUCT_BY_ID_REQUEST';\nvar FETCH_PRODUCT_BY_ID_SUCCESS = exports.FETCH_PRODUCT_BY_ID_SUCCESS = 'FETCH_PRODUCT_BY_ID_SUCCESS';\nvar FETCH_PRODUCT_BY_ID_FAILURE = exports.FETCH_PRODUCT_BY_ID_FAILURE = 'FETCH_PRODUCT_BY_ID_FAILURE';\nvar RESET_PRODUCT_BY_ID = exports.RESET_PRODUCT_BY_ID = 'RESET_PRODUCT_BY_ID';\n\n//# sourceURL=webpack:///./src/client/actions/constants.js?");
+
+/***/ }),
+
+/***/ "./src/client/actions/product.js":
+/*!***************************************!*\
+  !*** ./src/client/actions/product.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.fetchProductById = undefined;\n\nvar _axios = __webpack_require__(/*! axios */ \"axios\");\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nvar _constants = __webpack_require__(/*! ./constants */ \"./src/client/actions/constants.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar fetchProductById = exports.fetchProductById = function fetchProductById() {\n  return function () {\n    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, id) {\n      var res;\n      return regeneratorRuntime.wrap(function _callee$(_context) {\n        while (1) {\n          switch (_context.prev = _context.next) {\n            case 0:\n              dispatch({ type: _constants.FETCH_PRODUCT_BY_ID_REQUEST });\n              _context.prev = 1;\n              _context.next = 4;\n              return _axios2.default.get('https://node-sample-api.herokuapp.com/api/products/1');\n\n            case 4:\n              res = _context.sent;\n\n              dispatch({\n                type: _constants.FETCH_PRODUCT_BY_ID_SUCCESS,\n                payload: res.data\n              });\n              _context.next = 11;\n              break;\n\n            case 8:\n              _context.prev = 8;\n              _context.t0 = _context['catch'](1);\n\n              dispatch({\n                type: _constants.FETCH_PRODUCT_BY_ID_FAILURE,\n                payload: _context.t0\n              });\n\n            case 11:\n            case 'end':\n              return _context.stop();\n          }\n        }\n      }, _callee, undefined, [[1, 8]]);\n    }));\n\n    return function (_x, _x2) {\n      return _ref.apply(this, arguments);\n    };\n  }();\n};\n\n//# sourceURL=webpack:///./src/client/actions/product.js?");
+
+/***/ }),
+
+/***/ "./src/client/actions/products.js":
+/*!****************************************!*\
+  !*** ./src/client/actions/products.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.fetchAllProducts = undefined;\n\nvar _axios = __webpack_require__(/*! axios */ \"axios\");\n\nvar _axios2 = _interopRequireDefault(_axios);\n\nvar _constants = __webpack_require__(/*! ./constants */ \"./src/client/actions/constants.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step(\"next\", value); }, function (err) { step(\"throw\", err); }); } } return step(\"next\"); }); }; }\n\nvar fetchAllProducts = exports.fetchAllProducts = function fetchAllProducts() {\n  return function () {\n    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {\n      var res;\n      return regeneratorRuntime.wrap(function _callee$(_context) {\n        while (1) {\n          switch (_context.prev = _context.next) {\n            case 0:\n              dispatch({ type: _constants.FETCH_PRODUCTS_REQUEST });\n              _context.prev = 1;\n              _context.next = 4;\n              return _axios2.default.get('https://node-sample-api.herokuapp.com/api/products?page=1');\n\n            case 4:\n              res = _context.sent;\n\n              dispatch({\n                type: _constants.FETCH_PRODUCTS_SUCCESS,\n                payload: res.data\n              });\n              _context.next = 11;\n              break;\n\n            case 8:\n              _context.prev = 8;\n              _context.t0 = _context['catch'](1);\n\n              dispatch({\n                type: _constants.FETCH_PRODUCTS_FAILURE,\n                payload: _context.t0\n              });\n\n            case 11:\n            case 'end':\n              return _context.stop();\n          }\n        }\n      }, _callee, undefined, [[1, 8]]);\n    }));\n\n    return function (_x) {\n      return _ref.apply(this, arguments);\n    };\n  }();\n};\n\n//# sourceURL=webpack:///./src/client/actions/products.js?");
+
+/***/ }),
+
+/***/ "./src/client/components/ErrorBoundaries.js":
+/*!**************************************************!*\
+  !*** ./src/client/components/ErrorBoundaries.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar ErrorBoundary = function (_React$Component) {\n  _inherits(ErrorBoundary, _React$Component);\n\n  function ErrorBoundary(props) {\n    _classCallCheck(this, ErrorBoundary);\n\n    var _this = _possibleConstructorReturn(this, (ErrorBoundary.__proto__ || Object.getPrototypeOf(ErrorBoundary)).call(this, props));\n\n    _this.state = { hasError: false };\n    return _this;\n  }\n\n  _createClass(ErrorBoundary, [{\n    key: 'componentDidCatch',\n    value: function componentDidCatch(error, errorInfo) {\n      logErrorToMyService(error, errorInfo);\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      if (this.state.hasError) {\n        return _react2.default.createElement(\n          'h1',\n          null,\n          'Something went wrong.'\n        );\n      }\n\n      return this.props.children;\n    }\n  }], [{\n    key: 'getDerivedStateFromError',\n    value: function getDerivedStateFromError(error) {\n      return { hasError: true };\n    }\n  }]);\n\n  return ErrorBoundary;\n}(_react2.default.Component);\n\nexports.default = ErrorBoundary;\n\n//# sourceURL=webpack:///./src/client/components/ErrorBoundaries.js?");
+
+/***/ }),
+
+/***/ "./src/client/components/Footer.js":
+/*!*****************************************!*\
+  !*** ./src/client/components/Footer.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = function () {\n  return _react2.default.createElement(\n    'footer',\n    null,\n    'Footer'\n  );\n};\n\n//# sourceURL=webpack:///./src/client/components/Footer.js?");
+
+/***/ }),
+
+/***/ "./src/client/components/Header.js":
+/*!*****************************************!*\
+  !*** ./src/client/components/Header.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Header = function Header() {\n  return _react2.default.createElement(\n    'nav',\n    null,\n    'Header'\n  );\n};\nexports.default = Header;\n\n//# sourceURL=webpack:///./src/client/components/Header.js?");
+
+/***/ }),
+
+/***/ "./src/client/containers/ProductPage.js":
+/*!**********************************************!*\
+  !*** ./src/client/containers/ProductPage.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"]) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError(\"Invalid attempt to destructure non-iterable instance\"); } }; }();\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _product = __webpack_require__(/*! ../actions/product */ \"./src/client/actions/product.js\");\n\nvar _Header = __webpack_require__(/*! ../components/Header */ \"./src/client/components/Header.js\");\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nvar _Footer = __webpack_require__(/*! ../components/Footer */ \"./src/client/components/Footer.js\");\n\nvar _Footer2 = _interopRequireDefault(_Footer);\n\nvar _ErrorBoundaries = __webpack_require__(/*! ../components/ErrorBoundaries */ \"./src/client/components/ErrorBoundaries.js\");\n\nvar _ErrorBoundaries2 = _interopRequireDefault(_ErrorBoundaries);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction ProductPage(props) {\n  var _useState = (0, _react.useState)(props.product),\n      _useState2 = _slicedToArray(_useState, 2),\n      product = _useState2[0],\n      setProduct = _useState2[1];\n\n  (0, _react.useEffect)(function () {\n    props.fetchProductById();\n  }, []);\n\n  if (!product) return null;\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(_Header2.default, null),\n    _react2.default.createElement(\n      'div',\n      null,\n      'Here\\'s a ProductPage:'\n    ),\n    _react2.default.createElement(\n      'div',\n      null,\n      _react2.default.createElement(\n        _ErrorBoundaries2.default,\n        null,\n        product.productInfo.name\n      )\n    ),\n    _react2.default.createElement(_Footer2.default, null)\n  );\n}\nfunction mapStateToProps(state) {\n  return { product: state.product };\n}\nfunction loadData(store) {\n  return store.dispatch((0, _product.fetchProductById)());\n}\nexports.default = {\n  loadData: loadData,\n  component: (0, _reactRedux.connect)(mapStateToProps, { fetchProductById: _product.fetchProductById })(ProductPage)\n};\n\n//# sourceURL=webpack:///./src/client/containers/ProductPage.js?");
+
+/***/ }),
+
+/***/ "./src/client/containers/ProductsListPage.js":
+/*!***************************************************!*\
+  !*** ./src/client/containers/ProductsListPage.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.ProductElements = undefined;\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _products = __webpack_require__(/*! ../actions/products */ \"./src/client/actions/products.js\");\n\nvar _Header = __webpack_require__(/*! ../components/Header */ \"./src/client/components/Header.js\");\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nvar _Footer = __webpack_require__(/*! ../components/Footer */ \"./src/client/components/Footer.js\");\n\nvar _Footer2 = _interopRequireDefault(_Footer);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar ProductElements = exports.ProductElements = function ProductElements(props) {\n  return props.products.map(function (product, index) {\n    return _react2.default.createElement(\n      'li',\n      { key: index },\n      _react2.default.createElement(\n        _reactRouterDom.Link,\n        { to: '/pdp/' + product.id },\n        _react2.default.createElement('img', { src: product.img, alt: '' + product.name })\n      ),\n      _react2.default.createElement(\n        _reactRouterDom.Link,\n        { to: '/pdp/' + product.id },\n        product.name\n      )\n    );\n  });\n};\n\nvar ProductsList = function (_Component) {\n  _inherits(ProductsList, _Component);\n\n  function ProductsList() {\n    _classCallCheck(this, ProductsList);\n\n    return _possibleConstructorReturn(this, (ProductsList.__proto__ || Object.getPrototypeOf(ProductsList)).apply(this, arguments));\n  }\n\n  _createClass(ProductsList, [{\n    key: 'componentDidMount',\n    value: function componentDidMount() {\n      this.props.fetchAllProducts();\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n      console.log(this.props.products);\n      return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(_Header2.default, null),\n        _react2.default.createElement(\n          'div',\n          null,\n          'Here\\'s a big list of users:'\n        ),\n        _react2.default.createElement(\n          'ul',\n          null,\n          _react2.default.createElement(ProductElements, { products: this.props.products })\n        ),\n        _react2.default.createElement(_Footer2.default, null)\n      );\n    }\n  }]);\n\n  return ProductsList;\n}(_react.Component);\n\nfunction mapStateToProps(state) {\n  return { products: state.products.data };\n}\nfunction loadData(store) {\n  return store.dispatch((0, _products.fetchAllProducts)());\n}\n\nexports.default = {\n  loadData: loadData,\n  component: (0, _reactRedux.connect)(mapStateToProps, { fetchAllProducts: _products.fetchAllProducts })(ProductsList)\n};\n\n//# sourceURL=webpack:///./src/client/containers/ProductsListPage.js?");
+
+/***/ }),
+
+/***/ "./src/client/reducers/index.js":
+/*!**************************************!*\
+  !*** ./src/client/reducers/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _products = __webpack_require__(/*! ./products */ \"./src/client/reducers/products.js\");\n\nvar _products2 = _interopRequireDefault(_products);\n\nvar _product = __webpack_require__(/*! ./product */ \"./src/client/reducers/product.js\");\n\nvar _product2 = _interopRequireDefault(_product);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = (0, _redux.combineReducers)({\n  products: _products2.default,\n  product: _product2.default\n});\n\n//# sourceURL=webpack:///./src/client/reducers/index.js?");
+
+/***/ }),
+
+/***/ "./src/client/reducers/product.js":
+/*!****************************************!*\
+  !*** ./src/client/reducers/product.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _constants = __webpack_require__(/*! ../actions/constants */ \"./src/client/actions/constants.js\");\n\nvar INITIAL_STATE = {\n  fetching: false,\n  productInfo: null,\n  error: false,\n  page: 1\n};\n\nexports.default = function () {\n  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;\n  var action = arguments[1];\n\n  switch (action.type) {\n    case _constants.FETCH_PRODUCT_BY_ID_REQUEST:\n      return _extends({}, state, {\n        fetching: true\n      });\n    case _constants.FETCH_PRODUCT_BY_ID_SUCCESS:\n      return _extends({}, state, {\n        fetching: false,\n        productInfo: action.payload\n      });\n    case _constants.FETCH_PRODUCT_BY_ID_FAILURE:\n      return _extends({}, state, {\n        fetching: false,\n        error: true,\n        errorMessage: action.error\n      });\n    case _constants.RESET_PRODUCT_BY_ID:\n      return INITIAL_STATE;\n    default:\n      return state;\n  }\n};\n\n//# sourceURL=webpack:///./src/client/reducers/product.js?");
+
+/***/ }),
+
+/***/ "./src/client/reducers/products.js":
+/*!*****************************************!*\
+  !*** ./src/client/reducers/products.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nvar _constants = __webpack_require__(/*! ../actions/constants */ \"./src/client/actions/constants.js\");\n\nfunction _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }\n\nvar INITIAL_STATE = {\n  fetching: false,\n  data: [],\n  error: false,\n  page: 1\n};\n\nexports.default = function () {\n  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;\n  var action = arguments[1];\n\n  switch (action.type) {\n    case _constants.FETCH_PRODUCTS_REQUEST:\n      return _extends({}, state, {\n        fetching: true\n      });\n    case _constants.FETCH_PRODUCTS_SUCCESS:\n      return _extends({}, state, {\n        fetching: false,\n        data: state.page === 1 ? action.payload.data : [].concat(_toConsumableArray(state.data), [action.payload.data])\n      });\n    case _constants.FETCH_PRODUCTS_FAILURE:\n      return _extends({}, state, {\n        fetching: false,\n        error: true,\n        errorMessage: action.error\n      });\n    case _constants.RESET_PRODUCTS:\n      return INITIAL_STATE;\n    default:\n      return state;\n  }\n};\n\n//# sourceURL=webpack:///./src/client/reducers/products.js?");
+
+/***/ }),
+
+/***/ "./src/helpers/createStore.js":
+/*!************************************!*\
+  !*** ./src/helpers/createStore.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _redux = __webpack_require__(/*! redux */ \"redux\");\n\nvar _reduxThunk = __webpack_require__(/*! redux-thunk */ \"redux-thunk\");\n\nvar _reduxThunk2 = _interopRequireDefault(_reduxThunk);\n\nvar _reducers = __webpack_require__(/*! ../client/reducers */ \"./src/client/reducers/index.js\");\n\nvar _reducers2 = _interopRequireDefault(_reducers);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar creatingStore = function creatingStore() {\n  var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default));\n  return store;\n};\nexports.default = creatingStore;\n\n//# sourceURL=webpack:///./src/helpers/createStore.js?");
+
+/***/ }),
+
+/***/ "./src/helpers/renderer.js":
+/*!*********************************!*\
+  !*** ./src/helpers/renderer.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _server = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n\nvar _Routes = __webpack_require__(/*! ../client/Routes */ \"./src/client/Routes.js\");\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nvar _reactRedux = __webpack_require__(/*! react-redux */ \"react-redux\");\n\nvar _serializeJavascript = __webpack_require__(/*! serialize-javascript */ \"serialize-javascript\");\n\nvar _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = function (req, store) {\n  var context = {\n    insertCss: function insertCss() {\n      for (var _len = arguments.length, styles = Array(_len), _key = 0; _key < _len; _key++) {\n        styles[_key] = arguments[_key];\n      }\n\n      var removeCss = styles.map(function (x) {\n        return x._insertCss();\n      });\n      return function () {\n        removeCss.forEach(function (f) {\n          return f();\n        });\n      };\n    }\n  };\n  var content = (0, _server.renderToString)(_react2.default.createElement(\n    _reactRedux.Provider,\n    { store: store },\n    _react2.default.createElement(\n      _reactRouterDom.StaticRouter,\n      { context: { content: content }, location: req.path },\n      _react2.default.createElement(\n        'div',\n        null,\n        (0, _reactRouterConfig.renderRoutes)(_Routes2.default)\n      )\n    )\n  ));\n  return '\\n    <html>\\n      <head>\\n        <link rel=\"stylesheet\" href=\"main.css\">\\n      </head>\\n      <body>\\n        <div id=\"root\">' + content + '</div>\\n        <script>\\n          window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\\n        </script>\\n        <script type=\"text/babel\" src=\"bundle.js\"></script>\\n      </body>\\n    </html>';\n};\n\n//# sourceURL=webpack:///./src/helpers/renderer.js?");
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar _express = __webpack_require__(/*! express */ \"express\");\n\nvar _express2 = _interopRequireDefault(_express);\n\nvar _renderer = __webpack_require__(/*! ./helpers/renderer */ \"./src/helpers/renderer.js\");\n\nvar _renderer2 = _interopRequireDefault(_renderer);\n\nvar _createStore = __webpack_require__(/*! ./helpers/createStore */ \"./src/helpers/createStore.js\");\n\nvar _createStore2 = _interopRequireDefault(_createStore);\n\nvar _reactRouterConfig = __webpack_require__(/*! react-router-config */ \"react-router-config\");\n\nvar _Routes = __webpack_require__(/*! ./client/Routes */ \"./src/client/Routes.js\");\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\n__webpack_require__(/*! ./client/App.scss */ \"./src/client/App.scss\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n//const path = require('path');\nvar app = (0, _express2.default)();\napp.use(_express2.default.static('public'));\napp.get('*', function (req, res) {\n  var store = (0, _createStore2.default)();\n  var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {\n    var route = _ref.route;\n\n    return route.loadData ? route.loadData(store) : null;\n  });\n  Promise.all(promises).then(function () {\n    res.send((0, _renderer2.default)(req, store));\n  });\n  //res.send(renderer(req, store));\n});\napp.listen(3000, function () {\n  console.log('Listening on port 3000');\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ 0:
+/*!*******************************************!*\
+  !*** multi babel-polyfill ./src/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("__webpack_require__(/*! babel-polyfill */\"babel-polyfill\");\nmodule.exports = __webpack_require__(/*! ./src/index.js */\"./src/index.js\");\n\n\n//# sourceURL=webpack:///multi_babel-polyfill_./src/index.js?");
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("react");
+eval("module.exports = require(\"axios\");\n\n//# sourceURL=webpack:///external_%22axios%22?");
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var FETCH_PRODUCTS_REQUEST = exports.FETCH_PRODUCTS_REQUEST = 'FETCH_PRODUCTS_REQUEST';
-var FETCH_PRODUCTS_SUCCESS = exports.FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
-var FETCH_PRODUCTS_FAILURE = exports.FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE';
-var RESET_PRODUCTS = exports.RESET_PRODUCTS = 'RESET_PRODUCT';
-
-var FETCH_PRODUCT_BY_ID_REQUEST = exports.FETCH_PRODUCT_BY_ID_REQUEST = 'FETCH_PRODUCT_BY_ID_REQUEST';
-var FETCH_PRODUCT_BY_ID_SUCCESS = exports.FETCH_PRODUCT_BY_ID_SUCCESS = 'FETCH_PRODUCT_BY_ID_SUCCESS';
-var FETCH_PRODUCT_BY_ID_FAILURE = exports.FETCH_PRODUCT_BY_ID_FAILURE = 'FETCH_PRODUCT_BY_ID_FAILURE';
-var RESET_PRODUCT_BY_ID = exports.RESET_PRODUCT_BY_ID = 'RESET_PRODUCT_BY_ID';
-
-/***/ }),
-/* 2 */
+/***/ "babel-polyfill":
+/*!*********************************!*\
+  !*** external "babel-polyfill" ***!
+  \*********************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("react-redux");
+eval("module.exports = require(\"babel-polyfill\");\n\n//# sourceURL=webpack:///external_%22babel-polyfill%22?");
 
 /***/ }),
-/* 3 */
+
+/***/ "express":
+/*!**************************!*\
+  !*** external "express" ***!
+  \**************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("react-router-dom");
+eval("module.exports = require(\"express\");\n\n//# sourceURL=webpack:///external_%22express%22?");
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _ProductsListPage = __webpack_require__(16);
-
-var _ProductsListPage2 = _interopRequireDefault(_ProductsListPage);
-
-var _ProductPage = __webpack_require__(18);
-
-var _ProductPage2 = _interopRequireDefault(_ProductPage);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var routesArr = [_extends({}, _ProductsListPage2.default, {
-  path: '/products'
-}), _extends({}, _ProductPage2.default, {
-  path: '/pdp/:id'
-})];
-exports.default = routesArr;
-
-/***/ }),
-/* 5 */
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("axios");
+eval("module.exports = require(\"react\");\n\n//# sourceURL=webpack:///external_%22react%22?");
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Header = function Header() {
-  return _react2.default.createElement(
-    'nav',
-    null,
-    'Header'
-  );
-};
-exports.default = Header;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function () {
-  return _react2.default.createElement(
-    'footer',
-    null,
-    'Footer'
-  );
-};
-
-/***/ }),
-/* 8 */
+/***/ "react-dom/server":
+/*!***********************************!*\
+  !*** external "react-dom/server" ***!
+  \***********************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("react-router-config");
+eval("module.exports = require(\"react-dom/server\");\n\n//# sourceURL=webpack:///external_%22react-dom/server%22?");
 
 /***/ }),
-/* 9 */
+
+/***/ "react-redux":
+/*!******************************!*\
+  !*** external "react-redux" ***!
+  \******************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("redux");
+eval("module.exports = require(\"react-redux\");\n\n//# sourceURL=webpack:///external_%22react-redux%22?");
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(11);
-module.exports = __webpack_require__(12);
-
-
-/***/ }),
-/* 11 */
+/***/ "react-router-config":
+/*!**************************************!*\
+  !*** external "react-router-config" ***!
+  \**************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("babel-polyfill");
+eval("module.exports = require(\"react-router-config\");\n\n//# sourceURL=webpack:///external_%22react-router-config%22?");
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-var _express = __webpack_require__(13);
-
-var _express2 = _interopRequireDefault(_express);
-
-var _renderer = __webpack_require__(14);
-
-var _renderer2 = _interopRequireDefault(_renderer);
-
-var _createStore = __webpack_require__(22);
-
-var _createStore2 = _interopRequireDefault(_createStore);
-
-var _reactRouterConfig = __webpack_require__(8);
-
-var _Routes = __webpack_require__(4);
-
-var _Routes2 = _interopRequireDefault(_Routes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var app = (0, _express2.default)();
-app.use(_express2.default.static('public'));
-app.get('*', function (req, res) {
-  var store = (0, _createStore2.default)();
-  var promises = (0, _reactRouterConfig.matchRoutes)(_Routes2.default, req.path).map(function (_ref) {
-    var route = _ref.route;
-
-    return route.loadData ? route.loadData(store) : null;
-  });
-  Promise.all(promises).then(function () {
-    res.send((0, _renderer2.default)(req, store));
-  });
-  //res.send(renderer(req, store));
-});
-app.listen(3000, function () {
-  console.log('Listening on port 3000');
-});
-
-/***/ }),
-/* 13 */
+/***/ "react-router-dom":
+/*!***********************************!*\
+  !*** external "react-router-dom" ***!
+  \***********************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("express");
+eval("module.exports = require(\"react-router-dom\");\n\n//# sourceURL=webpack:///external_%22react-router-dom%22?");
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _server = __webpack_require__(15);
-
-var _Routes = __webpack_require__(4);
-
-var _Routes2 = _interopRequireDefault(_Routes);
-
-var _reactRouterDom = __webpack_require__(3);
-
-var _reactRouterConfig = __webpack_require__(8);
-
-var _reactRedux = __webpack_require__(2);
-
-var _serializeJavascript = __webpack_require__(21);
-
-var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (req, store) {
-  var context = {
-    insertCss: function insertCss() {
-      for (var _len = arguments.length, styles = Array(_len), _key = 0; _key < _len; _key++) {
-        styles[_key] = arguments[_key];
-      }
-
-      var removeCss = styles.map(function (x) {
-        return x._insertCss();
-      });
-      return function () {
-        removeCss.forEach(function (f) {
-          return f();
-        });
-      };
-    }
-  };
-  var content = (0, _server.renderToString)(_react2.default.createElement(
-    _reactRedux.Provider,
-    { store: store },
-    _react2.default.createElement(
-      _reactRouterDom.StaticRouter,
-      { context: { content: content }, location: req.path },
-      _react2.default.createElement(
-        'div',
-        null,
-        (0, _reactRouterConfig.renderRoutes)(_Routes2.default)
-      )
-    )
-  ));
-  return '\n    <html>\n      <head></head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>\n          window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\n        </script>\n        <script type="text/babel" src="bundle.js"></script>\n      </body>\n    </html>';
-};
-
-/***/ }),
-/* 15 */
+/***/ "redux":
+/*!************************!*\
+  !*** external "redux" ***!
+  \************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("react-dom/server");
+eval("module.exports = require(\"redux\");\n\n//# sourceURL=webpack:///external_%22redux%22?");
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ProductElements = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(2);
-
-var _products = __webpack_require__(17);
-
-var _Header = __webpack_require__(6);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-var _Footer = __webpack_require__(7);
-
-var _Footer2 = _interopRequireDefault(_Footer);
-
-var _reactRouterDom = __webpack_require__(3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ProductElements = exports.ProductElements = function ProductElements(props) {
-  return props.products.map(function (product, index) {
-    return _react2.default.createElement(
-      'li',
-      { key: index },
-      _react2.default.createElement(
-        _reactRouterDom.Link,
-        { to: '/pdp/' + product.id },
-        _react2.default.createElement('img', { src: product.img, alt: '' + product.name })
-      ),
-      _react2.default.createElement(
-        _reactRouterDom.Link,
-        { to: '/pdp/' + product.id },
-        product.name
-      )
-    );
-  });
-};
-
-var ProductsList = function (_Component) {
-  _inherits(ProductsList, _Component);
-
-  function ProductsList() {
-    _classCallCheck(this, ProductsList);
-
-    return _possibleConstructorReturn(this, (ProductsList.__proto__ || Object.getPrototypeOf(ProductsList)).apply(this, arguments));
-  }
-
-  _createClass(ProductsList, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.fetchAllProducts();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      console.log(this.props.products);
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Header2.default, null),
-        _react2.default.createElement(
-          'div',
-          null,
-          'Here\'s a big list of users:'
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          _react2.default.createElement(ProductElements, { products: this.props.products })
-        ),
-        _react2.default.createElement(_Footer2.default, null)
-      );
-    }
-  }]);
-
-  return ProductsList;
-}(_react.Component);
-
-function mapStateToProps(state) {
-  return { products: state.products.data };
-}
-function loadData(store) {
-  return store.dispatch((0, _products.fetchAllProducts)());
-}
-
-exports.default = {
-  loadData: loadData,
-  component: (0, _reactRedux.connect)(mapStateToProps, { fetchAllProducts: _products.fetchAllProducts })(ProductsList)
-};
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchAllProducts = undefined;
-
-var _axios = __webpack_require__(5);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _constants = __webpack_require__(1);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var fetchAllProducts = exports.fetchAllProducts = function fetchAllProducts() {
-  return function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var res;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              dispatch({ type: _constants.FETCH_PRODUCTS_REQUEST });
-              _context.prev = 1;
-              _context.next = 4;
-              return _axios2.default.get('https://node-sample-api.herokuapp.com/api/products?page=1');
-
-            case 4:
-              res = _context.sent;
-
-              dispatch({
-                type: _constants.FETCH_PRODUCTS_SUCCESS,
-                payload: res.data
-              });
-              _context.next = 11;
-              break;
-
-            case 8:
-              _context.prev = 8;
-              _context.t0 = _context['catch'](1);
-
-              dispatch({
-                type: _constants.FETCH_PRODUCTS_FAILURE,
-                payload: _context.t0
-              });
-
-            case 11:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined, [[1, 8]]);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-};
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(2);
-
-var _product = __webpack_require__(19);
-
-var _Header = __webpack_require__(6);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-var _Footer = __webpack_require__(7);
-
-var _Footer2 = _interopRequireDefault(_Footer);
-
-var _ErrorBoundaries = __webpack_require__(20);
-
-var _ErrorBoundaries2 = _interopRequireDefault(_ErrorBoundaries);
-
-var _reactRouterDom = __webpack_require__(3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function ProductPage(props) {
-  var _useState = (0, _react.useState)(props.product),
-      _useState2 = _slicedToArray(_useState, 2),
-      product = _useState2[0],
-      setProduct = _useState2[1];
-
-  (0, _react.useEffect)(function () {
-    props.fetchProductById();
-  }, []);
-  console.log(product);
-  if (!product) return null;
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(_Header2.default, null),
-    _react2.default.createElement(
-      'div',
-      null,
-      'Here\'s a ProductPage:'
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(
-        _ErrorBoundaries2.default,
-        null,
-        product.productInfo.name
-      )
-    ),
-    _react2.default.createElement(_Footer2.default, null)
-  );
-}
-function mapStateToProps(state) {
-  console.log('getting data');
-  return { product: state.product };
-}
-function loadData(store) {
-  return store.dispatch((0, _product.fetchProductById)());
-}
-exports.default = {
-  loadData: loadData,
-  component: (0, _reactRedux.connect)(mapStateToProps, { fetchProductById: _product.fetchProductById })(ProductPage)
-};
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchProductById = undefined;
-
-var _axios = __webpack_require__(5);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _constants = __webpack_require__(1);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var fetchProductById = exports.fetchProductById = function fetchProductById() {
-  return function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch, id) {
-      var res;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              dispatch({ type: _constants.FETCH_PRODUCT_BY_ID_REQUEST });
-              _context.prev = 1;
-              _context.next = 4;
-              return _axios2.default.get('https://node-sample-api.herokuapp.com/api/products/1');
-
-            case 4:
-              res = _context.sent;
-
-              console.log(res.data);
-              dispatch({
-                type: _constants.FETCH_PRODUCT_BY_ID_SUCCESS,
-                payload: res.data
-              });
-              _context.next = 12;
-              break;
-
-            case 9:
-              _context.prev = 9;
-              _context.t0 = _context['catch'](1);
-
-              dispatch({
-                type: _constants.FETCH_PRODUCT_BY_ID_FAILURE,
-                payload: _context.t0
-              });
-
-            case 12:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined, [[1, 9]]);
-    }));
-
-    return function (_x, _x2) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-};
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ErrorBoundary = function (_React$Component) {
-  _inherits(ErrorBoundary, _React$Component);
-
-  function ErrorBoundary(props) {
-    _classCallCheck(this, ErrorBoundary);
-
-    var _this = _possibleConstructorReturn(this, (ErrorBoundary.__proto__ || Object.getPrototypeOf(ErrorBoundary)).call(this, props));
-
-    _this.state = { hasError: false };
-    return _this;
-  }
-
-  _createClass(ErrorBoundary, [{
-    key: 'componentDidCatch',
-    value: function componentDidCatch(error, errorInfo) {
-      logErrorToMyService(error, errorInfo);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      if (this.state.hasError) {
-        return _react2.default.createElement(
-          'h1',
-          null,
-          'Something went wrong.'
-        );
-      }
-
-      return this.props.children;
-    }
-  }], [{
-    key: 'getDerivedStateFromError',
-    value: function getDerivedStateFromError(error) {
-      return { hasError: true };
-    }
-  }]);
-
-  return ErrorBoundary;
-}(_react2.default.Component);
-
-exports.default = ErrorBoundary;
-
-/***/ }),
-/* 21 */
+/***/ "redux-thunk":
+/*!******************************!*\
+  !*** external "redux-thunk" ***!
+  \******************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("serialize-javascript");
+eval("module.exports = require(\"redux-thunk\");\n\n//# sourceURL=webpack:///external_%22redux-thunk%22?");
 
 /***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _redux = __webpack_require__(9);
-
-var _reduxThunk = __webpack_require__(23);
-
-var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-var _reducers = __webpack_require__(24);
-
-var _reducers2 = _interopRequireDefault(_reducers);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var creatingStore = function creatingStore() {
-  var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default));
-  return store;
-};
-exports.default = creatingStore;
-
-/***/ }),
-/* 23 */
+/***/ "serialize-javascript":
+/*!***************************************!*\
+  !*** external "serialize-javascript" ***!
+  \***************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("redux-thunk");
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _redux = __webpack_require__(9);
-
-var _products = __webpack_require__(25);
-
-var _products2 = _interopRequireDefault(_products);
-
-var _product = __webpack_require__(26);
-
-var _product2 = _interopRequireDefault(_product);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = (0, _redux.combineReducers)({
-  products: _products2.default,
-  product: _product2.default
-});
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _constants = __webpack_require__(1);
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var INITIAL_STATE = {
-  fetching: false,
-  data: [],
-  error: false,
-  page: 1
-};
-
-exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
-  var action = arguments[1];
-
-  switch (action.type) {
-    case _constants.FETCH_PRODUCTS_REQUEST:
-      return _extends({}, state, {
-        fetching: true
-      });
-    case _constants.FETCH_PRODUCTS_SUCCESS:
-      return _extends({}, state, {
-        fetching: false,
-        data: state.page === 1 ? action.payload.data : [].concat(_toConsumableArray(state.data), [action.payload.data])
-      });
-    case _constants.FETCH_PRODUCTS_FAILURE:
-      return _extends({}, state, {
-        fetching: false,
-        error: true,
-        errorMessage: action.error
-      });
-    case _constants.RESET_PRODUCTS:
-      return INITIAL_STATE;
-    default:
-      return state;
-  }
-};
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _constants = __webpack_require__(1);
-
-var INITIAL_STATE = {
-  fetching: false,
-  productInfo: null,
-  error: false,
-  page: 1
-};
-
-exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
-  var action = arguments[1];
-
-  switch (action.type) {
-    case _constants.FETCH_PRODUCT_BY_ID_REQUEST:
-      return _extends({}, state, {
-        fetching: true
-      });
-    case _constants.FETCH_PRODUCT_BY_ID_SUCCESS:
-      return _extends({}, state, {
-        fetching: false,
-        productInfo: action.payload
-      });
-    case _constants.FETCH_PRODUCT_BY_ID_FAILURE:
-      return _extends({}, state, {
-        fetching: false,
-        error: true,
-        errorMessage: action.error
-      });
-    case _constants.RESET_PRODUCT_BY_ID:
-      return INITIAL_STATE;
-    default:
-      return state;
-  }
-};
+eval("module.exports = require(\"serialize-javascript\");\n\n//# sourceURL=webpack:///external_%22serialize-javascript%22?");
 
 /***/ })
-/******/ ]);
+
+/******/ });

@@ -10,7 +10,7 @@ function ProductPage(props) {
   useEffect(() => {
     props.fetchProductById()
   },[])
-  console.log(product);
+
   if(!product) return null;
   return (
     <div>
@@ -28,7 +28,6 @@ function ProductPage(props) {
   )
 }
 function mapStateToProps(state) {
-  console.log('getting data');
   return { product: state.product }
 }
 function loadData(store) {
