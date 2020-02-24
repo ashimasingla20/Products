@@ -8,12 +8,19 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import logger from 'redux-logger';
 import { renderRoutes } from 'react-router-config';
+import StyleContext from 'isomorphic-style-loader/StyleContext';
 import './App.scss'
-import './App.css'
+const insertCss = (...styles) => {
+  const removeCss = styles.map(style => style._insertCss())
+  return () => removeCss.forEach(dispose => dispose())
+}
 const store = createStore(reducers, window.INITIAL_STATE, applyMiddleware(thunk, logger));
 ReactDOM.hydrate(
-  <Provider store={store}>
-    <BrowserRouter>
-      <div>{renderRoutes(Routes)}</div>
-    </BrowserRouter>
-  </Provider>, document.querySelector('#root'));
+  <StyleContext.Provider value={{ insertCss }}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <div>{renderRoutes(Routes)}</div>
+      </BrowserRouter>
+    </Provider>
+  </StyleContext.Provider>
+ , document.querySelector('#root'));

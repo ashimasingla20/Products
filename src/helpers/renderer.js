@@ -5,24 +5,21 @@ import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import serialize from 'serialize-javascript';
+import StyleContext from 'isomorphic-style-loader/StyleContext';
 export default (req, store) => {
-  const context = {
-    insertCss: (...styles) => {
-      const removeCss = styles.map(x => x._insertCss());
-      return () => {
-        removeCss.forEach(f => f());
-      };
-    }
-  }
-  const content = renderToString(<Provider store={store}>
-    <StaticRouter context={{content}} location={req.path}>
-      <div>{renderRoutes(Routes)}</div>
-    </StaticRouter>
-  </Provider>);
+  const css = new Set() // CSS for all rendered React components
+  const insertCss = (...styles) => styles.forEach(style => css.add(style._getCss()))
+  const content = renderToString(<StyleContext.Provider value={{ insertCss }}>
+    <Provider store={store}>
+      <StaticRouter context={{content}} location={req.path}>
+        <div>{renderRoutes(Routes)}</div>
+      </StaticRouter>
+    </Provider>
+  </StyleContext.Provider>);
   return `
     <html>
       <head>
-        <link rel="stylesheet" href="main.css">
+        <style>${[...css].join('')}</style>
       </head>
       <body>
         <div id="root">${content}</div>

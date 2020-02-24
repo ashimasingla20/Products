@@ -5,6 +5,11 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ErrorBoundary from '../components/ErrorBoundaries';
 import { Link } from 'react-router-dom';
+//import useStyles from 'isomorphic-style-loader/useStyles'
+import withStyles from 'isomorphic-style-loader/withStyles'
+import s from './Product.scss';
+console.log(s);
+console.log(s.container)
 function ProductPage(props) {
   const [product, setProduct] = useState(props.product);
   useEffect(() => {
@@ -12,8 +17,9 @@ function ProductPage(props) {
   },[])
 
   if(!product) return null;
+  //useStyles(s);
   return (
-    <div>
+    <div className={s.container}>
     <Header/>
     <div>
       Here's a ProductPage:
@@ -35,5 +41,5 @@ function loadData(store) {
 }
 export default {
   loadData,
-  component: connect(mapStateToProps, {fetchProductById})(ProductPage)
+  component: withStyles(s)(connect(mapStateToProps, {fetchProductById})(ProductPage))
 }

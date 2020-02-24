@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchAllProducts } from '../actions/products';
+import { fetchCarousel } from '../actions/carousel';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
+import withStyles from 'isomorphic-style-loader/withStyles'
+import s from './Product.scss';
 export const ProductElements = (props) =>  {
   return props.products.map((product, index) => <li key={index}>
     <Link to={`/pdp/${product.id}`}>
@@ -18,13 +21,13 @@ export const ProductElements = (props) =>  {
 class ProductsList extends Component {
   componentDidMount() {
     this.props.fetchAllProducts();
+    this.props.fetchCarousel();
   }
   render() {
-    console.log(this.props.products);
     return(
-      <div>
+      <div className={s.container}>
         <Header/>
-        <div>
+        <div className={`{s.root}`}>
           Here's a big list of users:
         </div>
         <ul>
@@ -44,5 +47,5 @@ function loadData(store) {
 
 export default {
   loadData,
-  component: connect(mapStateToProps, {fetchAllProducts})(ProductsList)
+  component: withStyles(s)(connect(mapStateToProps, {fetchAllProducts, fetchCarousel})(ProductsList))
 }
