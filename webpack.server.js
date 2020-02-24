@@ -8,6 +8,9 @@ const config = {
   // Inform webpack that we're building a bundle
   // for nodeJS, rather than for the browser
   target: 'node',
+  resolve: {
+    extensions: ['.js', '.css','.scss']
+  },
 
   // Tell webpack the root file of our
   // server application

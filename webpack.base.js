@@ -1,4 +1,6 @@
 const autoprefixer = require('autoprefixer');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   // Tell webpack to run babel on every file it runs through
   module: {
@@ -18,7 +20,15 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'isomorphic-style-loader',
+          { 
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: true,
+              // publicPath: (resourcePath, context) => {
+              //   return '../';
+              // },
+            } 
+          },
           require.resolve('style-loader'),
           {
             loader: require.resolve('css-loader'),
@@ -48,14 +58,23 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.scss$/,
-        loaders: [
-            require.resolve('style-loader'),
-            require.resolve('css-loader'),
-            require.resolve('sass-loader')
-        ]
-      }
+      // {
+      //   test: /\.scss$/,
+      //   use : [
+      //     {loader: MiniCssExtractPlugin.loader},
+      //     {loader: require.resolve('style-loader')},
+      //     {loader: require.resolve('css-loader')},
+      //     {loader: require.resolve('sass-loader')}
+      //   ]
+      //       // require.resolve('style-loader'),
+      //       // require.resolve('css-loader'),
+      //       // require.resolve('sass-loader')
+        
+      // }
     ]
-  }
+  },
+  plugins: [
+    new MiniCssExtractPlugin(),
+  ],
+ 
 };

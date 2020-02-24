@@ -6,6 +6,9 @@ const config = {
   // Tell webpack the root file of our
   // server application
   entry: ['babel-polyfill', './src/client/client.js'],
+  resolve: {
+    extensions: ['.js', '.css','.scss']
+  },
 
   // Tell webpack where to put the output file
   // that is generated
