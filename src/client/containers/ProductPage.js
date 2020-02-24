@@ -16,7 +16,7 @@ function ProductPage(props) {
   console.log(product);
   if(!product) return null;
   return (
-    <div className={s.container}>
+    <div>
     <Header/>
     <div>
       Here's a ProductPage:
