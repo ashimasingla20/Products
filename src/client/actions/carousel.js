@@ -5,7 +5,8 @@ import { FETCH_CAROUSEL_REQUEST,
 export const fetchCarousel = () => async(dispatch, id) => {
   dispatch({type: FETCH_CAROUSEL_REQUEST})
   try {
-    const res = await axios.get(`https://node-sample-api.herokuapp.com/api/products/1`)
+    const res = await axios.get(`https://node-sample-api.herokuapp.com/api/home`);
+    console.log(res);
     dispatch({
       type: FETCH_CAROUSEL_SUCCESS,
       payload: res.data

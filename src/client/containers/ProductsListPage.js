@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import withStyles from 'isomorphic-style-loader/withStyles'
-import s from './Product.scss';
+import s from '../styles/Product.scss';
 export const ProductElements = (props) =>  {
   return props.products.map((product, index) => <li key={index}>
     <Link to={`/pdp/${product.id}`}>
@@ -19,7 +19,12 @@ export const ProductElements = (props) =>  {
 }
 
 class ProductsList extends Component {
+  constructor(props) {
+    super(props);
+    console.log('here in constructor');
+  }
   componentDidMount() {
+    console.log(this.props);
     this.props.fetchAllProducts();
     this.props.fetchCarousel();
   }

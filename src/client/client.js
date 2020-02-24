@@ -16,11 +16,11 @@ const insertCss = (...styles) => {
 }
 const store = createStore(reducers, window.INITIAL_STATE, applyMiddleware(thunk, logger));
 ReactDOM.hydrate(
-  <StyleContext.Provider value={{ insertCss }}>
     <Provider store={store}>
-      <BrowserRouter>
-        <div>{renderRoutes(Routes)}</div>
-      </BrowserRouter>
+      <StyleContext.Provider value={{ insertCss }}>
+        <BrowserRouter>
+          <div>{renderRoutes(Routes)}</div>
+        </BrowserRouter>
+      </StyleContext.Provider>
     </Provider>
-  </StyleContext.Provider>
  , document.querySelector('#root'));

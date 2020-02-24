@@ -7,17 +7,15 @@ import ErrorBoundary from '../components/ErrorBoundaries';
 import { Link } from 'react-router-dom';
 //import useStyles from 'isomorphic-style-loader/useStyles'
 import withStyles from 'isomorphic-style-loader/withStyles'
-import s from './Product.scss';
-console.log(s);
-console.log(s.container)
+import s from '../styles/Product.scss';
 function ProductPage(props) {
   const [product, setProduct] = useState(props.product);
   useEffect(() => {
+    console.log('inside use effect');
     props.fetchProductById()
   },[])
 
   if(!product) return null;
-  //useStyles(s);
   return (
     <div className={s.container}>
     <Header/>

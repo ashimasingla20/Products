@@ -9,14 +9,15 @@ import StyleContext from 'isomorphic-style-loader/StyleContext';
 export default (req, store) => {
   const css = new Set() // CSS for all rendered React components
   const insertCss = (...styles) => styles.forEach(style => css.add(style._getCss()))
-  const content = renderToString(<StyleContext.Provider value={{ insertCss }}>
+  const content = renderToString(
     <Provider store={store}>
-      <StaticRouter context={{content}} location={req.path}>
-        <div>{renderRoutes(Routes)}</div>
-      </StaticRouter>
-    </Provider>
-  </StyleContext.Provider>);
-  return `
+      <StyleContext.Provider value={{ insertCss }}>
+        <StaticRouter context={{content}} location={req.path}>
+          <div>{renderRoutes(Routes)}</div>
+        </StaticRouter>
+      </StyleContext.Provider>
+    </Provider>);
+  return `<!DOCTYPE html>
     <html>
       <head>
         <style>${[...css].join('')}</style>
