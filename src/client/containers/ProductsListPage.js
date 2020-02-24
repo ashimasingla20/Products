@@ -24,11 +24,14 @@ class ProductsList extends Component {
     console.log('here in constructor');
   }
   componentDidMount() {
-    console.log(this.props);
+    // setTimeout(()=> {
+    //   console.log(this.props);
+    // },0 );
     this.props.fetchAllProducts();
     this.props.fetchCarousel();
   }
   render() {
+    console.log(this.props.carousel.data);
     return(
       <div className={s.container}>
         <Header/>
@@ -44,10 +47,17 @@ class ProductsList extends Component {
   }
 }
 function mapStateToProps(state) {
-  return { products: state.products.data }
+  return { 
+    products: state.products.data,
+    carousel: state.carousel 
+  }
 }
 function loadData(store) {
-  return store.dispatch(fetchAllProducts())
+  return Promise.all([
+    store.dispatch(fetchAllProducts()),
+    store.dispatch(fetchCarousel())
+  ]);
+  //return store.dispatch(fetchAllProducts())
 }
 
 export default {

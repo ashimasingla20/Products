@@ -4,9 +4,6 @@ const path = require('path');
 module.exports = {
   // Tell webpack to run babel on every file it runs through
   mode: 'development',
-  plugins: [ 
-    //new MiniCssExtractPlugin()
-  ],
   module: {
     rules: [
       {
@@ -25,10 +22,6 @@ module.exports = {
         test: /\.css$/,
         use: [
           'isomorphic-style-loader',
-          // {
-          //   loader: MiniCssExtractPlugin.loader,
-          // },
-          // require.resolve('style-loader'),
           {
             loader: require.resolve('css-loader'),
             options: {
@@ -38,8 +31,6 @@ module.exports = {
           {
             loader: require.resolve('postcss-loader'),
             options: {
-              // Necessary for external CSS imports to work
-              // https://github.com/facebookincubator/create-react-app/issues/2677
               ident: 'postcss',
               plugins: () => [
                 require('postcss-flexbugs-fixes'),
@@ -61,16 +52,10 @@ module.exports = {
         test: /\.scss$/,
         loaders: [
             'isomorphic-style-loader',
-            // {
-            //   loader: MiniCssExtractPlugin.loader,
-            // },
-            //require.resolve('style-loader'),
             {
               loader: require.resolve('css-loader'),
               options: {
                 modules: true,
-                //localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                //hashPrefix: 'hash'
               },
             },
             require.resolve('sass-loader')

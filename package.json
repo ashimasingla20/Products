@@ -17,6 +17,7 @@
     "axios": "0.16.2",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
+    "babel-plugin-react-ssr": "^1.0.1",
     "babel-preset-env": "1.6.0",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-es2017": "6.24.1",
