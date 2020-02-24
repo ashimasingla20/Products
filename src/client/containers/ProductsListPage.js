@@ -1,50 +1,30 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchAllProducts } from '../actions/products';
 import { fetchCarousel } from '../actions/carousel';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Link } from 'react-router-dom';
 import withStyles from 'isomorphic-style-loader/withStyles'
 import s from '../styles/Product.scss';
-export const ProductElements = (props) =>  {
-  return props.products.map((product, index) => <li key={index}>
-    <Link to={`/pdp/${product.id}`}>
-      <img src={product.img} alt={`${product.name}`}/>
-    </Link>
-    <Link to={`/pdp/${product.id}`}>
-      {product.name}
-    </Link>
-    </li>);
-}
-
-class ProductsList extends Component {
-  constructor(props) {
-    super(props);
-    console.log('here in constructor');
-  }
-  componentDidMount() {
-    // setTimeout(()=> {
-    //   console.log(this.props);
-    // },0 );
-    this.props.fetchAllProducts();
-    this.props.fetchCarousel();
-  }
-  render() {
-    console.log(this.props.carousel.data);
-    return(
-      <div className={s.container}>
-        <Header/>
-        <div className={`{s.root}`}>
-          Here's a big list of users:
-        </div>
-        <ul>
-          <ProductElements products ={this.props.products}/>
-        </ul>
-        <Footer/>
+import ProductElements from '../components/ProductList/ProductElements'
+function ProductsList(props) {
+  const [products, setProducts] = useState(props.products);
+  useEffect(() => {
+    props.fetchAllProducts();
+    props.fetchCarousel();
+  },[]);
+  return (
+    <div className={s.container}>
+      <Header/>
+      <div>
+        Here's a big list of users:
       </div>
-    )
-  }
+      <ul>
+        <ProductElements products ={products}/>
+      </ul>
+      <Footer/>
+    </div>
+  )
 }
 function mapStateToProps(state) {
   return { 
@@ -57,7 +37,6 @@ function loadData(store) {
     store.dispatch(fetchAllProducts()),
     store.dispatch(fetchCarousel())
   ]);
-  //return store.dispatch(fetchAllProducts())
 }
 
 export default {

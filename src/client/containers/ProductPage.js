@@ -11,10 +11,9 @@ import s from '../styles/Product.scss';
 function ProductPage(props) {
   const [product, setProduct] = useState(props.product);
   useEffect(() => {
-    console.log('inside use effect');
     props.fetchProductById()
   },[])
-
+  console.log(product);
   if(!product) return null;
   return (
     <div className={s.container}>
