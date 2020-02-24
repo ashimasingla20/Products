@@ -12,18 +12,31 @@ function ProductsList(props) {
   const [products, setProducts] = useState(props.products);
   const [carousel, setCarousel] = useState(props.carousel);
   useEffect(() => {
-    props.fetchAllProducts();
-    props.fetchCarousel();
+    if(!products) {
+      props.fetchAllProducts();
+    }
+    console.log('carousel is');
+    console.log(carousel);
+    if(!carousel.length) {
+      console.log('here in carousel---->');
+      props.fetchCarousel();
+    }
   },[]);
-  console.log(props);
+  const getMoreProducts = () => {
+    props.fetchAllProducts();
+  }
+  console.log(carousel);
   return (
     <div>
       <Header/>
-      <Carousel carouselData={carousel}/>
-      <ul className={ProductListStyle.container}>
+      {!!carousel
+        && carousel.carousel
+        && <Carousel carouselData={carousel.data.carousel}/> }
+      {!!products 
+        && <ul className={ProductListStyle.container}>
         <ProductElements products ={products}/>
-      </ul>
-      <button>
+      </ul>}
+      <button type="button" onClick={getMoreProducts}>
         Load More
       </button>
       <Footer/>
@@ -33,13 +46,13 @@ function ProductsList(props) {
 function mapStateToProps(state) {
   return { 
     products: state.products.data,
-    carousel: state.carousel.data.carousel
+    carousel: state.carousel.data
   }
 }
 function loadData(store) {
   return Promise.all([
     store.dispatch(fetchAllProducts()),
-    store.dispatch(fetchCarousel())
+    //store.dispatch(fetchCarousel())
   ]);
 }
 
