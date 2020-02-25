@@ -1,11 +1,10 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from "react-router-dom";
 import { fetchProductById } from '../actions/product';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ErrorBoundary from '../components/ErrorBoundaries';
-import { Link, BrowserRouter } from 'react-router-dom';
-import  { Redirect } from 'react-router-dom'
 import withStyles from 'isomorphic-style-loader/withStyles'
 import ProductStyles from '../styles/Product.scss';
 import classNames from 'classnames';
@@ -26,23 +25,21 @@ const Rating = ({rating}) => {
   </div>)
 }
 function ProductPage(props) {
+  const { match: { params: {id} } } = props;
   const [product, setProduct] = useState(props.product);
-  // const id = this.props.match.params.id;
   useEffect(() => {
-    props.fetchProductById(1)
+    if(!product.productInfo 
+      || (product.productInfo && id!= product.productInfo.id)) {
+      props.fetchProductById(id)
+    }
   },[])
   useEffect(() => {
     setProduct(props.product)
   },[props.product])
   const { productInfo } = product;
-  console.log(product);
   if(!product || !productInfo) return null;
-  console.log('product info is');
-  console.log(productInfo);
   const setRedirect = () => {
-    console.log('here in redirect');
     props.history.push(`/products`);
-    //return <Redirect to='/products' />
   }
   return (
     <div>
@@ -51,7 +48,6 @@ function ProductPage(props) {
         <div className={ProductStyles.imagebox}>
           <span className={ProductStyles.back} onClick={setRedirect}>
             <FaArrowLeft size={25} className={ProductStyles.icon}/>
-            
           </span>
           <ErrorBoundary>
             <img 
@@ -68,7 +64,6 @@ function ProductPage(props) {
             </div>
             <div className={ProductStyles.block}>
               <p className={ProductStyles.head}>Rating</p>
-              {/* <p className={ProductStyles.value}>{productInfo.rating}</p> */}
               <div className={ProductStyles.ratingcontainer}>
                 <Rating rating={productInfo.rating}/>
               </div>
@@ -90,10 +85,9 @@ function mapStateToProps(state) {
   return { product: state.product }
 }
 function loadData(store, id='') {
-  console.log('id in load data');
-  console.log(id);
   return store.dispatch(fetchProductById(id))
 }
 export default {
+  loadData,
   component: withStyles(ProductStyles)(connect(mapStateToProps, {fetchProductById})(ProductPage))
 }
