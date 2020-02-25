@@ -23,7 +23,8 @@ export default (state = INITIAL_STATE, action) =>  {
         data : state.page === 1
         ? action.payload.data
         : [...state.data,
-          action.payload.data ]
+          ...action.payload.data ],
+        page: action.payload.nextPage
       }
     case FETCH_PRODUCTS_FAILURE: 
       return {

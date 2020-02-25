@@ -7,7 +7,9 @@ import ErrorBoundary from '../components/ErrorBoundaries';
 import { Link } from 'react-router-dom';
 //import useStyles from 'isomorphic-style-loader/useStyles'
 import withStyles from 'isomorphic-style-loader/withStyles'
-import s from '../styles/Product.scss';
+import ProductStyles from '../styles/Product.scss';
+import classNames from 'classnames';
+import { MdStar, MdStarBorder} from 'react-icons/md';
 function ProductPage(props) {
   const [product, setProduct] = useState(props.product);
   useEffect(() => {
@@ -15,17 +17,38 @@ function ProductPage(props) {
   },[])
   console.log(product);
   if(!product) return null;
+  const { productInfo } = product;
   return (
     <div>
     <Header/>
-    <div>
-      Here's a ProductPage:
-    </div>
-    <div>
-      <ErrorBoundary>
-        {product.productInfo.name}
-      </ErrorBoundary>
-    </div>
+      <div className={ProductStyles.container}>
+        <div className={ProductStyles.imagebox}>
+          <ErrorBoundary>
+            <img 
+              className={ProductStyles.image}
+              src={productInfo.img} 
+              alt={productInfo.name}/>
+          </ErrorBoundary>
+        </div>
+        <ErrorBoundary>
+          <div>
+            <div className={ProductStyles.block}>
+              <p className={ProductStyles.head}>Product Info</p>
+              <p className={ProductStyles.value}>{productInfo.name} </p>
+            </div>
+            <div className={ProductStyles.block}>
+              <p className={ProductStyles.head}>Rating</p>
+              <p className={ProductStyles.value}>{productInfo.rating}</p>
+            </div>
+            <div className={ProductStyles.block}>
+              <p className={ProductStyles.head}>Description</p>
+              <div className={classNames(ProductStyles.value, ProductStyles.description)} >
+                {productInfo.description}
+              </div>
+            </div>
+          </div>
+        </ErrorBoundary>
+      </div>
     <Footer/>
   </div>
   )
@@ -38,5 +61,5 @@ function loadData(store) {
 }
 export default {
   loadData,
-  component: withStyles(s)(connect(mapStateToProps, {fetchProductById})(ProductPage))
+  component: withStyles(ProductStyles)(connect(mapStateToProps, {fetchProductById})(ProductPage))
 }

@@ -1,11 +1,37 @@
+@import "variables";
 body{
   margin: 0;
   background: #F4f4f4;
 }
 .container {
   margin: 0 auto;
-  max-width: 1140px
+  max-width: 1140px;
+  display: flex;
+  margin-top: 50px;
+  margin-bottom: 250px;
 }
-// .root{ 
-//   background: green;
-// }
+.imagebox{
+  margin-right: 50px;
+}
+.image{
+  display: flex;
+  justify-content: flex-start;
+}
+.block{
+  display: flex;
+}
+.head{
+  font-size: $smallFont;
+  font-weight: $bold;
+  margin-right: 20px;
+  min-width: 150px;
+}
+.value{
+  font-size: $smallFont;
+  font-weight: $normal;
+}
+.description {
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 10px;
+}
