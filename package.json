@@ -19,7 +19,7 @@
     "@fortawesome/react-fontawesome": "^0.1.8",
     "@ngx-share/core": "^7.1.4",
     "autoprefixer": "7.1.6",
-    "axios": "0.16.2",
+    "axios": "0.18.1",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-plugin-react-ssr": "^1.0.1",
