@@ -4,8 +4,8 @@ import { fetchProductById } from '../actions/product';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ErrorBoundary from '../components/ErrorBoundaries';
-import { Link } from 'react-router-dom';
-//import useStyles from 'isomorphic-style-loader/useStyles'
+import { Link, BrowserRouter } from 'react-router-dom';
+import  { Redirect } from 'react-router-dom'
 import withStyles from 'isomorphic-style-loader/withStyles'
 import ProductStyles from '../styles/Product.scss';
 import classNames from 'classnames';
@@ -29,6 +29,11 @@ function ProductPage(props) {
   if(!product || !productInfo) return null;
   console.log('product info is');
   console.log(productInfo);
+  const setRedirect = () => {
+    console.log('here in redirect');
+    props.history.push(`/products`);
+    //return <Redirect to='/products' />
+  }
   return (
     <div>
     <Header/>
@@ -36,7 +41,7 @@ function ProductPage(props) {
         {/* <IoMdArrowBack/> */}
         {/* <FontAwesomeIcon icon={check-square} /> */}
         <div className={ProductStyles.imagebox}>
-          <Link to={'/products'} className={ProductStyles.back}>Go Back</Link>
+          <span className={ProductStyles.back} onClick={setRedirect}>Go Back</span>
           <ErrorBoundary>
             <img 
               className={ProductStyles.image}
