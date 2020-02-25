@@ -9,12 +9,22 @@ import  { Redirect } from 'react-router-dom'
 import withStyles from 'isomorphic-style-loader/withStyles'
 import ProductStyles from '../styles/Product.scss';
 import classNames from 'classnames';
-// import { MdStar, MdStarBorder, IoMdArrowBack} from 'react-icons/md';
-// import { FaArrowLeft } from "react-icons/fa";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import fontawesome from '@fortawesome/fontawesome';
-// import { faCheckSquare, faCoffee } from '@fortawesome/fontawesome-free-solid';
-//fontawesome.library.add(faCheckSquare, faCoffee);
+import { FaArrowLeft } from "react-icons/fa";
+import { IoMdStarOutline,IoIosStar } from "react-icons/io";
+const Rating = ({rating}) => {
+  const totalStars = 5;
+  return (<div className={ProductStyles.stars}>
+    {[...Array(totalStars)].map((n, i) => ( 
+        i <rating 
+          ? <IoIosStar
+            size={25}
+            key={`star-${i}`}/>
+          : <IoMdStarOutline 
+            size={25}
+            key={`star-${i}`}/> 
+      ))}
+  </div>)
+}
 function ProductPage(props) {
   const [product, setProduct] = useState(props.product);
   // const id = this.props.match.params.id;
@@ -38,10 +48,11 @@ function ProductPage(props) {
     <div>
     <Header/>
       <div className={ProductStyles.container}>
-        {/* <IoMdArrowBack/> */}
-        {/* <FontAwesomeIcon icon={check-square} /> */}
         <div className={ProductStyles.imagebox}>
-          <span className={ProductStyles.back} onClick={setRedirect}>Go Back</span>
+          <span className={ProductStyles.back} onClick={setRedirect}>
+            <FaArrowLeft size={25} className={ProductStyles.icon}/>
+            
+          </span>
           <ErrorBoundary>
             <img 
               className={ProductStyles.image}
@@ -57,7 +68,10 @@ function ProductPage(props) {
             </div>
             <div className={ProductStyles.block}>
               <p className={ProductStyles.head}>Rating</p>
-              <p className={ProductStyles.value}>{productInfo.rating}</p>
+              {/* <p className={ProductStyles.value}>{productInfo.rating}</p> */}
+              <div className={ProductStyles.ratingcontainer}>
+                <Rating rating={productInfo.rating}/>
+              </div>
             </div>
             <div className={ProductStyles.block}>
               <p className={ProductStyles.head}>Description</p>
