@@ -11,12 +11,13 @@ import Carousel from '../components/ProductList/Carousel';
 function ProductsList(props) {
   const [products, setProducts] = useState(props.products);
   const [carousel, setCarousel] = useState(props.carousel);
+  console.log('carousel is');
   console.log(carousel);
   useEffect(() => {
     if(!products.data.length) {
       props.fetchAllProducts(1);
     }
-    if(!carousel.length) {
+    if(carousel.data && (!carousel.data.carousel && !carousel.data.carousel.length)) {
       props.fetchCarousel();
     }
   },[]);
@@ -32,9 +33,9 @@ function ProductsList(props) {
   return (
     <div>
       <Header/>
-      {!!carousel
-        && carousel.carousel
-        && <Carousel carouselData={carousel.carousel}/> }
+      {!!carousel.data
+        && carousel.data.carousel
+        && <Carousel carouselData={carousel.data.carousel}/> }
       {!!products 
         && <ul className={ProductListStyle.container}>
         <ProductElements products ={products.data}/>
@@ -52,7 +53,7 @@ function ProductsList(props) {
 function mapStateToProps(state) {
   return { 
     products: state.products,
-    carousel: state.carousel.data
+    carousel: state.carousel
   }
 }
 function loadData(store, id='') {

@@ -4,7 +4,7 @@ import { FETCH_CAROUSEL_REQUEST,
  } from '../actions/constants';
 const INITIAL_STATE = {
   fetching: false,
-  data: [],
+  data: null,
   error: false,
   page: 1
 }
