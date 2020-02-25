@@ -20,7 +20,6 @@ function ProductPage(props) {
   useEffect(() => {
     props.fetchProductById()
   },[])
-  console.log(product);
   if(!product) return null;
   const { productInfo } = product;
   return (
