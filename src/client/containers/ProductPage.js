@@ -19,10 +19,16 @@ function ProductPage(props) {
   const [product, setProduct] = useState(props.product);
   // const id = this.props.match.params.id;
   useEffect(() => {
-    //props.fetchProductById()
+    props.fetchProductById(1)
   },[])
-  if(!product) return null;
+  useEffect(() => {
+    setProduct(props.product)
+  },[props.product])
   const { productInfo } = product;
+  console.log(product);
+  if(!product || !productInfo) return null;
+  console.log('product info is');
+  console.log(productInfo);
   return (
     <div>
     <Header/>
@@ -70,6 +76,5 @@ function loadData(store, id='') {
   return store.dispatch(fetchProductById(id))
 }
 export default {
-  loadData,
   component: withStyles(ProductStyles)(connect(mapStateToProps, {fetchProductById})(ProductPage))
 }

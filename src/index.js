@@ -29,6 +29,8 @@ app.get('*', (req, res) => {
   //   })
   // })
   Promise.all(promises).then((data) => {
+    console.log('data returned is');
+    console.log(data);
     console.log("store get state");
     console.log(store.getState());
     res.send(renderer(req, store))
