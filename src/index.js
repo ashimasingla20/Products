@@ -11,10 +11,26 @@ const app = express();
 app.use(express.static('public/'));
 app.get('*', (req, res) => {
   const store = creatingStore();
+  var id = '';
+  if(req.params && req.params['0'] && req.params['0'].includes('pdp')) {
+    console.log('request param id');
+    id = req.params['0'].split('/')[2];
+    console.log(id);
+  }
   const promises = matchRoutes(Routes, req.path).map(({route}) => {
-    return route.loadData ? route.loadData(store) : null;
+    return route.loadData ? route.loadData(store, id) : null;
   });
-  Promise.all(promises).then(() => {
+  //console.log('promise is ----->')
+  console.log(promises);
+  // promises.map((promise) => {
+  //   promise.then((data) => {
+  //     console.log('here is data we get');
+  //     console.log(data);
+  //   })
+  // })
+  Promise.all(promises).then((data) => {
+    console.log("store get state");
+    console.log(store.getState());
     res.send(renderer(req, store))
   });
   //res.send(renderer(req, store));

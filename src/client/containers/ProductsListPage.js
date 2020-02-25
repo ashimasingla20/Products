@@ -136,7 +136,7 @@ function mapStateToProps(state) {
     carousel: state.carousel.data
   }
 }
-function loadData(store) {
+function loadData(store, id='') {
   return Promise.all([
     store.dispatch(fetchAllProducts(1)),
     store.dispatch(fetchCarousel())

@@ -12,7 +12,7 @@ export default (req, store) => {
   const content = renderToString(
     <Provider store={store}>
       <StyleContext.Provider value={{ insertCss }}>
-        <StaticRouter context={{content}} location={req.path}>
+        <StaticRouter context={{}} location={req.path}>
           <div>{renderRoutes(Routes)}</div>
         </StaticRouter>
       </StyleContext.Provider>
@@ -29,7 +29,7 @@ export default (req, store) => {
         <script>
           window.INITIAL_STATE = ${serialize(store.getState())}
         </script>
-        <script src="bundle.js"></script>
+         <script src="/bundle.js" defer></script>
       </body>
     </html>`
 }

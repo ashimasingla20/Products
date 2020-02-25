@@ -17,8 +17,9 @@ import classNames from 'classnames';
 //fontawesome.library.add(faCheckSquare, faCoffee);
 function ProductPage(props) {
   const [product, setProduct] = useState(props.product);
+  // const id = this.props.match.params.id;
   useEffect(() => {
-    props.fetchProductById()
+    //props.fetchProductById()
   },[])
   if(!product) return null;
   const { productInfo } = product;
@@ -63,8 +64,10 @@ function ProductPage(props) {
 function mapStateToProps(state) {
   return { product: state.product }
 }
-function loadData(store) {
-  return store.dispatch(fetchProductById())
+function loadData(store, id='') {
+  console.log('id in load data');
+  console.log(id);
+  return store.dispatch(fetchProductById(id))
 }
 export default {
   loadData,
