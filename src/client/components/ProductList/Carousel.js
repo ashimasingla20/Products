@@ -11,7 +11,6 @@ const sliderSettings = {
   autoplay: true
 }
 const Carousel = (props) => {
-  console.log(props.carouselData);
   return (
     <div className={s.carousel}>
       <Slider {...sliderSettings}>

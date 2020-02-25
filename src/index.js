@@ -3,11 +3,12 @@ import renderer from './helpers/renderer';
 import creatingStore from './helpers/createStore';
 import { matchRoutes } from 'react-router-config';
 import Routes from './client/Routes';
+const path = require('path');
 // import './client/App.scss';
-
 //const path = require('path');
 const app = express();
-app.use(express.static('public'));
+//app.use(express.static(path.join(__dirname, 'public/')));
+app.use(express.static('public/'));
 app.get('*', (req, res) => {
   const store = creatingStore();
   const promises = matchRoutes(Routes, req.path).map(({route}) => {

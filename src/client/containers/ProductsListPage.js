@@ -74,8 +74,6 @@ class ProductsList extends Component {
 
   render() {
     const {carousel, products} = this.props;
-    console.log(carousel);
-    console.log(products);
     return (
       <div>
         <Header/>

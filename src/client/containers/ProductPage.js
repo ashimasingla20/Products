@@ -9,7 +9,12 @@ import { Link } from 'react-router-dom';
 import withStyles from 'isomorphic-style-loader/withStyles'
 import ProductStyles from '../styles/Product.scss';
 import classNames from 'classnames';
-import { MdStar, MdStarBorder} from 'react-icons/md';
+// import { MdStar, MdStarBorder, IoMdArrowBack} from 'react-icons/md';
+// import { FaArrowLeft } from "react-icons/fa";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import fontawesome from '@fortawesome/fontawesome';
+// import { faCheckSquare, faCoffee } from '@fortawesome/fontawesome-free-solid';
+//fontawesome.library.add(faCheckSquare, faCoffee);
 function ProductPage(props) {
   const [product, setProduct] = useState(props.product);
   useEffect(() => {
@@ -22,7 +27,10 @@ function ProductPage(props) {
     <div>
     <Header/>
       <div className={ProductStyles.container}>
+        {/* <IoMdArrowBack/> */}
+        {/* <FontAwesomeIcon icon={check-square} /> */}
         <div className={ProductStyles.imagebox}>
+          <Link to={'/products'} className={ProductStyles.back}>Go Back</Link>
           <ErrorBoundary>
             <img 
               className={ProductStyles.image}

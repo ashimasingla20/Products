@@ -3,6 +3,11 @@ import ProductPage from './containers/ProductPage';
 const routesArr = [
   {
     ...ProductsListPage,
+    path: '/',
+    exact: true
+  },
+  {
+    ...ProductsListPage,
     path: '/products'
   },
   {
