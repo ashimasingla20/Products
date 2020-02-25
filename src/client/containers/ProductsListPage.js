@@ -17,7 +17,7 @@ function ProductsList(props) {
     if(!products.data.length) {
       props.fetchAllProducts(1);
     }
-    if(carousel.data && (!carousel.data.carousel && !carousel.data.carousel.length)) {
+    if(!carousel.data || (!carousel.data.carousel && !carousel.data.carousel.length)) {
       props.fetchCarousel();
     }
   },[]);
