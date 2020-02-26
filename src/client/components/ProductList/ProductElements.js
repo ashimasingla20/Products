@@ -1,21 +1,21 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles'
-import s from '../../styles/ProductElements.scss';
+import ProductElementStyles from '../../styles/ProductElements.scss';
 const ProductElements = (props) =>  {
-  return props.products.map((product, index) => <li key={index} className={s.element}>
-    <div className={s.block}>
-      <a href={`/pdp/${product.id}`}>
-        <img src={product.img} 
-          alt={`${product.name}`} 
-          className={s.image}/>
-      </a>
-      <a href={`/pdp/${product.id}`} className={s.name}>
-        {product.name}
-      </a>
-      <p className={s.price}>
-        Price: Rs{product.price}
-      </p>
-    </div>
-  </li>);
+	return props.products.map((product, index) => <li key={index} className={ProductElementStyles.element}>
+		<div className={ProductElementStyles.block}>
+			<a href={`/pdp/${product.id}`}>
+				<img src={product.img} 
+					alt={`${product.name}`} 
+					className={ProductElementStyles.image}/>
+			</a>
+			<a href={`/pdp/${product.id}`} className={ProductElementStyles.name}>
+				{product.name}
+			</a>
+			<p className={ProductElementStyles.price}>
+				Price: Rs{product.price}
+			</p>
+		</div>
+	</li>);
 }
-export default withStyles(s)(ProductElements);
+export default withStyles(ProductElementStyles)(ProductElements);
