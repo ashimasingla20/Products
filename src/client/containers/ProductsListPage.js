@@ -14,21 +14,21 @@ function ProductsList(props) {
   const [carousel, setCarousel] = useState(props.carousel);
   let { isBrowser, isServer } = useSSR();
   if(isBrowser) {
-    setTimeout(() =>{
+    useEffect(() => {
       const browserData = window.INITIAL_STATE;
       setProducts(browserData.products);
       setCarousel(browserData.carousel);
-    },0);
+    },[]);
   }
   if(isServer){
     useEffect(() => {
       setProducts(props.staticContext.products);
-      return () => props.resetFetchAllProducts()
-    },[props.staticContext.products ])
-    useEffect(() => {
       setCarousel(props.staticContext.carousel);
-      return () => props.resetCarousel()
-    },[props.staticContext.carousel ])
+      return () => {
+        props.resetCarousel()
+        props.resetFetchAllProducts()
+      }
+    },[])
   }
   //fallback for ssr only fetch if not ssr data available
   useEffect(() => {
@@ -48,6 +48,7 @@ function ProductsList(props) {
   const getMoreProducts = (e, page) => {
     props.fetchAllProducts(page);
   }
+  console.log(products);
   return (
     <div>
       <Header/>
