@@ -11,17 +11,17 @@ import { FaArrowLeft } from "react-icons/fa";
 import { IoMdStarOutline,IoIosStar } from "react-icons/io";
 import useSSR from 'use-ssr';
 const Rating = ({rating}) => {
-  const totalStars = 5;
-  return (<div className={ProductStyles.stars}>
-	{[...Array(totalStars)].map((ele, i) => ( 
-		i <rating 
-		? <IoIosStar
-			size={25}
-			key={`star-${i}`}/>
-		: <IoMdStarOutline 
-			size={25}
-			key={`star-${i}`}/> 
-	))}
+	const totalStars = 5;
+	return (<div className={ProductStyles.stars}>
+		{[...Array(totalStars)].map((ele, i) => ( 
+			i <rating 
+			? <IoIosStar
+				size={25}
+				key={`star-${i}`}/>
+			: <IoMdStarOutline 
+				size={25}
+				key={`star-${i}`}/> 
+		))}
   </div>)
 }
 function ProductPage(props) {
@@ -94,6 +94,6 @@ function loadData(store, id='') {
 	return store.dispatch(fetchProductById(id))
 }
 export default {
-  loadData,
-  component: withStyles(ProductStyles)(connect(mapStateToProps, {fetchProductById, resetFetchProduct})(ProductPage))
+	loadData,
+	component: withStyles(ProductStyles)(connect(mapStateToProps, {fetchProductById, resetFetchProduct})(ProductPage))
 }
