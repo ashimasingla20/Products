@@ -18,7 +18,7 @@ function ProductsList(props) {
 			const browserData = window.INITIAL_STATE;
 			setProducts(browserData.products);
 			setCarousel(browserData.carousel);
-		},[]);
+		}, []);
 	}
 	if(isServer){
 		useEffect(() => {
@@ -28,7 +28,7 @@ function ProductsList(props) {
 			props.resetCarousel()
 			props.resetFetchAllProducts()
 		}
-		},[])
+		}, [])
 	}
 	//fallback for ssr only fetch if not ssr data available
 	useEffect(() => {
@@ -38,10 +38,10 @@ function ProductsList(props) {
 		if(!carousel.data || (!carousel.data.carousel && !carousel.data.carousel.length)) {
 			props.fetchCarousel();
 		}
-	},[]);
+	}, []);
 	useEffect(() => {
 		setProducts(props.products)
-	},[props.products])
+	}, [props.products])
 	useEffect(() => {
 		setCarousel(props.carousel)
 	},[props.carousel])
@@ -80,14 +80,13 @@ function loadData(store, id='') {
 		store.dispatch(fetchCarousel())
 	]);
 }
-
+const mapDispatchToProps = {
+	fetchAllProducts, 
+	fetchCarousel,
+	resetFetchAllProducts,
+	resetCarousel
+}
 export default {
   loadData,
-  component: withStyles(ProductListStyle)(connect(mapStateToProps, 
-	{
-		fetchAllProducts, 
-		fetchCarousel,
-		resetFetchAllProducts,
-		resetCarousel
-	})(ProductsList))
+  component: withStyles(ProductListStyle)(connect(mapStateToProps, mapDispatchToProps)(ProductsList))
 }
