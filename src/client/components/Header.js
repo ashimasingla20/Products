@@ -1,13 +1,13 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles'
-import s from '../styles/Header.scss';
+import HeaderStyle from '../styles/Header.scss';
 const Header = () => {
-  return (
-    <nav className={s.header}>
-      <div className={s.company}>
-        <span className={s.companyText}>Tokopedia</span>
-      </div>
-    </nav>
-  );
+	return (
+		<nav className={HeaderStyle.header}>
+			<div className={HeaderStyle.company}>
+				<span className={HeaderStyle.companyText}>Tokopedia</span>
+			</div>
+		</nav>
+	);
 };
-export default withStyles(s)(Header);
+export default withStyles(HeaderStyle)(Header);

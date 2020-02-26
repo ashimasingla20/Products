@@ -3,7 +3,7 @@ import withStyles from 'isomorphic-style-loader/withStyles'
 import footerStyle from '../styles/Footer.scss';
 const Footer = () => {
 	return (<footer className={footerStyle.footer}>
-		<div className={s.text}>
+		<div className={footerStyle.text}>
 			<span>Made with ❤️ in India</span>
 		</div>
 	</footer>)
