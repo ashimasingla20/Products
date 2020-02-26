@@ -13,7 +13,7 @@ const sliderSettings = {
 const Carousel = (props) => {
 	return (
 		<div className={carouselStyle.carousel}>
-			<Slider {...sliderSettings}>
+			<Slider {...sliderSettings} className={carouselStyle.container}>
 			{
 				props.carouselData.map((carouselEle, carouselIndex) => {
 					return (<img key={`carousle-${carouselIndex}`}

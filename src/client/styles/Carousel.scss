@@ -1,9 +1,14 @@
 .carousel{
 	max-width: 1160px;
 	margin: 0 auto;
-	margin-top: 50px;
-	height: 200px;
+	margin-top: 0;
+	height: 250px;
 }
-.element{
-	height: 200px;
+.element {
+	height: 250px!important;
+	width: 330px!important;
+	object-fit: contain;
+}
+.container {
+	height: 250px!important;
 }
