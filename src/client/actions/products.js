@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_FAILURE } from './constants';
+  FETCH_PRODUCTS_FAILURE,
+  RESET_PRODUCTS
+} from './constants';
 export const fetchAllProducts = (page) => async(dispatch) => {
   dispatch({type: FETCH_PRODUCTS_REQUEST})
   try {
@@ -17,3 +19,7 @@ export const fetchAllProducts = (page) => async(dispatch) => {
     })
   }
 }
+export const resetFetchAllProducts = () => async(dispatch) => {
+  dispatch({type: RESET_PRODUCTS})
+}
+

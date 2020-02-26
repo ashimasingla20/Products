@@ -1,16 +1,36 @@
 import React, { useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import { fetchAllProducts } from '../actions/products';
-import { fetchCarousel } from '../actions/carousel';
+import { fetchAllProducts, resetFetchAllProducts } from '../actions/products';
+import { fetchCarousel, resetCarousel } from '../actions/carousel';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import withStyles from 'isomorphic-style-loader/withStyles'
 import ProductListStyle from '../styles/ProductList.scss';
 import ProductElements from '../components/ProductList/ProductElements';
 import Carousel from '../components/ProductList/Carousel';
+import useSSR from 'use-ssr';
 function ProductsList(props) {
   const [products, setProducts] = useState(props.products);
   const [carousel, setCarousel] = useState(props.carousel);
+  let { isBrowser, isServer } = useSSR();
+  if(isBrowser) {
+    setTimeout(() =>{
+      const browserData = window.INITIAL_STATE;
+      setProducts(browserData.products);
+      setCarousel(browserData.carousel);
+    },0);
+  }
+  if(isServer){
+    useEffect(() => {
+      setProducts(props.staticContext.products);
+      return () => props.resetFetchAllProducts()
+    },[props.staticContext.products ])
+    useEffect(() => {
+      setCarousel(props.staticContext.carousel);
+      return () => props.resetCarousel()
+    },[props.staticContext.carousel ])
+  }
+  //fallback for ssr only fetch if not ssr data available
   useEffect(() => {
     if(!products.data.length) {
       props.fetchAllProducts(1);
@@ -63,5 +83,10 @@ function loadData(store, id='') {
 
 export default {
   loadData,
-  component: withStyles(ProductListStyle)(connect(mapStateToProps, {fetchAllProducts, fetchCarousel})(ProductsList))
+  component: withStyles(ProductListStyle)(connect(mapStateToProps, 
+      {fetchAllProducts, 
+        fetchCarousel,
+        resetFetchAllProducts,
+        resetCarousel
+      })(ProductsList))
 }

@@ -12,9 +12,6 @@ const ProductElements = (props) =>  {
       <a href={`/pdp/${product.id}`} className={s.name}>
         {product.name}
       </a>
-      {/* <Link to={`/pdp/${product.id}`} className={s.name}>
-        {product.name}
-      </Link> */}
       <p className={s.price}>
         Price: Rs{product.price}
       </p>

@@ -1,6 +1,7 @@
 import { FETCH_CAROUSEL_REQUEST,
   FETCH_CAROUSEL_SUCCESS,
-  FETCH_CAROUSEL_FAILURE
+  FETCH_CAROUSEL_FAILURE,
+  RESET_CAROUSEL
  } from '../actions/constants';
 const INITIAL_STATE = {
   fetching: false,
@@ -28,8 +29,8 @@ export default (state = INITIAL_STATE, action) =>  {
         error: true,
         errorMessage: action.error
       }
-    // case RESET_PRODUCTS: 
-    //   return INITIAL_STATE
+    case RESET_CAROUSEL: 
+      return INITIAL_STATE
     default: 
       return state
   }

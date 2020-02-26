@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { FETCH_CAROUSEL_REQUEST,
   FETCH_CAROUSEL_SUCCESS,
-  FETCH_CAROUSEL_FAILURE} from './constants';
+  FETCH_CAROUSEL_FAILURE,
+  RESET_CAROUSEL
+} from './constants';
 export const fetchCarousel = () => async(dispatch, id) => {
   dispatch({type: FETCH_CAROUSEL_REQUEST})
   try {
@@ -16,4 +18,7 @@ export const fetchCarousel = () => async(dispatch, id) => {
       payload: error
     })
   }
+}
+export const resetCarousel = () => async(dispatch) => {
+  dispatch({type: RESET_CAROUSEL})
 }

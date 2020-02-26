@@ -28,19 +28,19 @@ const Rating = ({rating}) => {
 function ProductPage(props) {
   const { match: { params: {id} } } = props;
   const [product, setProduct] = useState(props.product);
-  var { isBrowser, isServer } = useSSR();
-  if(isBrowser) {
-    setTimeout(() =>{
-      const browserData = window.INITIAL_STATE;
-      setProduct(browserData.product);
-    },0);
-  }
+  let { isBrowser, isServer } = useSSR();
   if(isServer){
     useEffect(() => {
       console.log('here running use effect')
       setProduct(props.staticContext.product);
       return () => props.resetFetchProduct()
     },[props.staticContext.product])
+  }
+  if(isBrowser) {
+    setTimeout(() =>{
+      const browserData = window.INITIAL_STATE;
+      setProduct(browserData.product);
+    },0);
   }
   useEffect(() => {
     if(!product.productInfo 
