@@ -30,23 +30,22 @@ function ProductPage(props) {
   	let { isBrowser, isServer } = useSSR();
   	if(isServer){
 		useEffect(() => {
-			console.log('here running use effect')
 			setProduct(props.staticContext.product);
 			return () => props.resetFetchProduct()
-		},[props.staticContext.product])
+		}, [props.staticContext.product])
   	}
 	if(isBrowser) {
 		useEffect(() => {
 			const browserData = window.INITIAL_STATE;
 			setProduct(browserData.product);
-		},[]);
+		}, []);
 	}
 	useEffect(() => {
 		if(!product.productInfo 
 		|| (product.productInfo && id!= product.productInfo.id)) {
-		props.fetchProductById(id)
+			props.fetchProductById(id)
 		}
-	},[])
+	}, [])
 	const { productInfo } = product;
 	if(!product || !productInfo) return null;
 	return (<div>

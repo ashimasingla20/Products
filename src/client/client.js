@@ -15,10 +15,6 @@ const insertCss = (...styles) => {
   return () => removeCss.forEach(dispose => dispose())
 }
 const store = createStore(reducers, window.INITIAL_STATE, applyMiddleware(thunk, logger));
-console.log('window initial state is ----->');
-console.log(window.INITIAL_STATE);
-console.log('store on server is---->');
-console.log(store.getState());
 ReactDOM.hydrate(
     <Provider store={store}>
       <StyleContext.Provider value={{ insertCss }}>
