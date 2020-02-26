@@ -87,6 +87,6 @@ const mapDispatchToProps = {
 	resetCarousel
 }
 export default {
-  loadData,
-  component: withStyles(ProductListStyle)(connect(mapStateToProps, mapDispatchToProps)(ProductsList))
+	loadData,
+	component: withStyles(ProductListStyle)(connect(mapStateToProps, mapDispatchToProps)(ProductsList))
 }
