@@ -19,10 +19,10 @@ app.get('*', (req, res) => {
 	const promises = matchRoutes(Routes, req.path).map(({route}) => {
 		return route.loadData 
 			? route.loadData(store, id) 
-			.then((data) => {
-				context = store.getState();
-				res.send(renderer(req, store, context))
-			})
+				.then((data) => {
+					context = store.getState();
+					res.send(renderer(req, store, context))
+				})
 			: null;
 	});
 })

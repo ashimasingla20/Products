@@ -1,39 +1,39 @@
 @import 'variables';
 .element{
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
-  margin-bottom: 20px;
-  background: $white;
+	display: flex;
+	flex-direction: column;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	background: $white;
 }
 .name {
-  cursor: pointer;
-  text-decoration: none;
-  color: #4990e2;
-  font-weight: 700;
-  line-height: 1.5;
-  word-break: break-word;
-  text-transform: uppercase;
+	cursor: pointer;
+	text-decoration: none;
+	color: #4990e2;
+	font-weight: 700;
+	line-height: 1.5;
+	word-break: break-word;
+	text-transform: uppercase;
 }
 .price {
-  font-size: 14px;
-  color: $black;
-  font-weight: 500;
-  line-height: 1.5;
-  word-break: break-word;
-  overflow: hidden;
-  margin: 5px 0;
-  width: 100%;
+	font-size: 14px;
+	color: $black;
+	font-weight: 500;
+	line-height: 1.5;
+	word-break: break-word;
+	overflow: hidden;
+	margin: 5px 0;
+	width: 100%;
 }
 .image{
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
+	width: 200px;
+	height: 200px;
+	object-fit: contain;
 }
 .block {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 5px;
-  padding: 10px;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 5px;
+	padding: 10px;
 }
