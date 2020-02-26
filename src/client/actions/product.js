@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {FETCH_PRODUCT_BY_ID_SUCCESS,
   FETCH_PRODUCT_BY_ID_FAILURE,
-  FETCH_PRODUCT_BY_ID_REQUEST} from './constants';
+  FETCH_PRODUCT_BY_ID_REQUEST,
+  RESET_PRODUCT_BY_ID} from './constants';
 export const fetchProductById = (id) => async(dispatch) => {
   dispatch({type: FETCH_PRODUCT_BY_ID_REQUEST})
   try {
@@ -20,6 +21,9 @@ export const fetchProductById = (id) => async(dispatch) => {
       payload: error
     })
   }
+}
+export const resetFetchProduct = () => async(dispatch) => {
+  dispatch({type: RESET_PRODUCT_BY_ID})
 }
 // export const fetchProductById = (id) => {
 //     return dispatch => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component} from 'react';
+import React, { useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { fetchAllProducts } from '../actions/products';
 import { fetchCarousel } from '../actions/carousel';
@@ -11,8 +11,6 @@ import Carousel from '../components/ProductList/Carousel';
 function ProductsList(props) {
   const [products, setProducts] = useState(props.products);
   const [carousel, setCarousel] = useState(props.carousel);
-  console.log('carousel is');
-  console.log(carousel);
   useEffect(() => {
     if(!products.data.length) {
       props.fetchAllProducts(1);
@@ -43,7 +41,7 @@ function ProductsList(props) {
       <button 
         type="button" 
         className={ProductListStyle.button}
-        onClick={(e) => getMoreProducts(e,products.page)}>
+        onClick={(e) => getMoreProducts(e, products.page)}>
         Load More
       </button>
       <Footer/>

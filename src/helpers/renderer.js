@@ -6,13 +6,15 @@ import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 import serialize from 'serialize-javascript';
 import StyleContext from 'isomorphic-style-loader/StyleContext';
-export default (req, store) => {
+export default (req, store, context) => {
+  console.log('context inside renderer');
+  console.log(context);
   const css = new Set() // CSS for all rendered React components
   const insertCss = (...styles) => styles.forEach(style => css.add(style._getCss()))
   const content = renderToString(
     <Provider store={store}>
       <StyleContext.Provider value={{ insertCss }}>
-        <StaticRouter context={{}} location={req.path}>
+        <StaticRouter context={context} location={req.path}>
           <div>{renderRoutes(Routes)}</div>
         </StaticRouter>
       </StyleContext.Provider>
@@ -29,7 +31,7 @@ export default (req, store) => {
         <script>
           window.INITIAL_STATE = ${serialize(store.getState())}
         </script>
-         <script src="/bundle.js" defer></script>
+        <script src="/bundle.js" defer></script>
       </body>
     </html>`
 }

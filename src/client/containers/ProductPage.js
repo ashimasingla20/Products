@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { fetchProductById } from '../actions/product';
+import { fetchProductById,resetFetchProduct } from '../actions/product';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ErrorBoundary from '../components/ErrorBoundaries';
@@ -10,6 +10,7 @@ import ProductStyles from '../styles/Product.scss';
 import classNames from 'classnames';
 import { FaArrowLeft } from "react-icons/fa";
 import { IoMdStarOutline,IoIosStar } from "react-icons/io";
+import useSSR from 'use-ssr';
 const Rating = ({rating}) => {
   const totalStars = 5;
   return (<div className={ProductStyles.stars}>
@@ -27,15 +28,26 @@ const Rating = ({rating}) => {
 function ProductPage(props) {
   const { match: { params: {id} } } = props;
   const [product, setProduct] = useState(props.product);
+  var { isBrowser, isServer } = useSSR();
+  if(isBrowser) {
+    setTimeout(() =>{
+      const browserData = window.INITIAL_STATE;
+      setProduct(browserData.product);
+    },0);
+  }
+  if(isServer){
+    useEffect(() => {
+      console.log('here running use effect')
+      setProduct(props.staticContext.product);
+      return () => props.resetFetchProduct()
+    },[props.staticContext.product])
+  }
   useEffect(() => {
     if(!product.productInfo 
       || (product.productInfo && id!= product.productInfo.id)) {
       props.fetchProductById(id)
     }
   },[])
-  useEffect(() => {
-    setProduct(props.product)
-  },[props.product])
   const { productInfo } = product;
   if(!product || !productInfo) return null;
   const setRedirect = () => {
@@ -46,9 +58,12 @@ function ProductPage(props) {
     <Header/>
       <div className={ProductStyles.container}>
         <div className={ProductStyles.imagebox}>
-          <span className={ProductStyles.back} onClick={setRedirect}>
+          <a href="/products" className={ProductStyles.back}>
             <FaArrowLeft size={25} className={ProductStyles.icon}/>
-          </span>
+          </a>
+          {/* <span className={ProductStyles.back} onClick={setRedirect}>
+            <FaArrowLeft size={25} className={ProductStyles.icon}/>
+          </span> */}
           <ErrorBoundary>
             <img 
               className={ProductStyles.image}
@@ -89,5 +104,5 @@ function loadData(store, id='') {
 }
 export default {
   loadData,
-  component: withStyles(ProductStyles)(connect(mapStateToProps, {fetchProductById})(ProductPage))
+  component: withStyles(ProductStyles)(connect(mapStateToProps, {fetchProductById, resetFetchProduct})(ProductPage))
 }
